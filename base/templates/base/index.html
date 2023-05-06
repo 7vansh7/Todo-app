@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .margin{
+            display: block;
+            margin-block-start: 1em;
+            margin-block-end: 1em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            margin: 10px;
+            }
+        
+    </style>
+</head>
+<body>
+
+    <form method="post" action="/">
+        <label for="desc">Add Task here </label>
+        <input type="text" id ='desc' name="description">
+        <br>
+        <br>
+        <input type="submit" >
+        {% csrf_token %}
+    </form>
+    <h1>Todo</h1>
+    {% for item in item %}
+    
+    {% if item.complete == True %}
+        <strike class="margin">{{item.description}}</strike>
+        <a href="{% url 'updateItem' item.id %}">Update</a>
+        <a href="{% url 'deleteItem' item.id %}">Delete</a>
+        <br>
+
+    {% else %}
+        <p class="margin">{{item.description}}</p>
+        <a href="{% url 'updateItem' item.id %}">Update</a>
+        <a href="{% url 'deleteItem' item.id %}">Delete</a>
+
+    {% endif %}
+    {% endfor %}
+
+</body>
+</html>
